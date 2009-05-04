@@ -12,44 +12,54 @@ if ( ! defined('EXT')) exit('Invalid file request');
  */
 
 class Ri_states_select extends Fieldframe_Fieldtype {
-	                                                 
+
 	var $info = array(
 			'name'             => 'RI States Select',
-			'version'          => '0.1',
+			'version'          => '0.2',
 			'desc'             => 'Creates a select menu with the 50 United States of America.',
 			'docs_url'         => 'http://github.com'
 			);
-			
-			
+
+
+		/**
+		 * Display Field
+		 *
+		 * @param  string  $field_name      The field's name
+		 * @param  mixed   $field_data      The field's current value
+		 * @param  array   $field_settings  The field's settings
+		 * @return string  The field's HTML
+		 */
 		function display_field($field_name, $field_data, $field_settings)
 		{
 		 	global $DSP;
-			$states = array('AL'=>"Alabama",  
-						'AK'=>"Alaska",  
-						'AZ'=>"Arizona",  
-						'AR'=>"Arkansas",  
-						'CA'=>"California",  
-						'CO'=>"Colorado",  
-						'CT'=>"Connecticut",  
-						'DE'=>"Delaware",  
-						'DC'=>"District Of Columbia",  
-						'FL'=>"Florida",  
-						'GA'=>"Georgia",  
-						'HI'=>"Hawaii",  
-						'ID'=>"Idaho",  
-						'IL'=>"Illinois",  
-						'IN'=>"Indiana",  
-						'IA'=>"Iowa",  
-						'KS'=>"Kansas",  
-						'KY'=>"Kentucky",  
-						'LA'=>"Louisiana",  
-						'ME'=>"Maine",  
-						'MD'=>"Maryland",  
-						'MA'=>"Massachusetts",  
-						'MI'=>"Michigan",  
-						'MN'=>"Minnesota",  
-						'MS'=>"Mississippi",  
-						'MO'=>"Missouri",  
+			$states = array(
+						'--'=>'--',
+						'AL'=>"Alabama",
+						'AK'=>"Alaska",
+						'AZ'=>"Arizona",
+						'AR'=>"Arkansas",
+						'CA'=>"California",
+						'CO'=>"Colorado",
+						'CT'=>"Connecticut",
+						'DE'=>"Delaware",
+						'DC'=>"District Of Columbia",
+						'FL'=>"Florida",
+						'GA'=>"Georgia",
+						'HI'=>"Hawaii",
+						'ID'=>"Idaho",
+						'IL'=>"Illinois",
+						'IN'=>"Indiana",
+						'IA'=>"Iowa",
+						'KS'=>"Kansas",
+						'KY'=>"Kentucky",
+						'LA'=>"Louisiana",
+						'ME'=>"Maine",
+						'MD'=>"Maryland",
+						'MA'=>"Massachusetts",
+						'MI'=>"Michigan",
+						'MN'=>"Minnesota",
+						'MS'=>"Mississippi",
+						'MO'=>"Missouri",
 						'MT'=>"Montana",
 						'NE'=>"Nebraska",
 						'NV'=>"Nevada",
@@ -59,31 +69,46 @@ class Ri_states_select extends Fieldframe_Fieldtype {
 						'NY'=>"New York",
 						'NC'=>"North Carolina",
 						'ND'=>"North Dakota",
-						'OH'=>"Ohio",  
-						'OK'=>"Oklahoma",  
-						'OR'=>"Oregon",  
-						'PA'=>"Pennsylvania",  
-						'RI'=>"Rhode Island",  
-						'SC'=>"South Carolina",  
+						'OH'=>"Ohio",
+						'OK'=>"Oklahoma",
+						'OR'=>"Oregon",
+						'PA'=>"Pennsylvania",
+						'RI'=>"Rhode Island",
+						'SC'=>"South Carolina",
 						'SD'=>"South Dakota",
-						'TN'=>"Tennessee",  
-						'TX'=>"Texas",  
-						'UT'=>"Utah",  
-						'VT'=>"Vermont",  
-						'VA'=>"Virginia",  
-						'WA'=>"Washington",  
-						'WV'=>"West Virginia",  
-						'WI'=>"Wisconsin",  
+						'TN'=>"Tennessee",
+						'TX'=>"Texas",
+						'UT'=>"Utah",
+						'VT'=>"Vermont",
+						'VA'=>"Virginia",
+						'WA'=>"Washington",
+						'WV'=>"West Virginia",
+						'WI'=>"Wisconsin",
 						'WY'=>"Wyoming");
-						                 
-												
+
+
 			$r = $DSP->input_select_header($field_name);
 			foreach ($states as $key => $value):
-				$r .= $DSP->input_select_option($key, $value, $field_data == $key);
+				$r .= $DSP->input_select_option(($key == '--' ? '' : $key), $value, $field_data == $key);
 			endforeach;
-			$r .= $DSP->input_select_footer();			
-			return $r; 
+			$r .= $DSP->input_select_footer();
+			return $r;
 		}
+
+		/**
+		 * Display Cell
+		 *
+		 * @param  string  $cell_name      The cell's name
+		 * @param  mixed   $cell_data      The cell's current value
+		 * @param  array   $cell_settings  The cell's settings
+		 * @return string  The cell's HTML
+		 * @author Brandon Kelly <me@brandon-kelly.com>
+		 */
+		function display_cell($cell_name, $cell_data, $cell_settings)
+		{
+			return $this->display_field($cell_name, $cell_data, $cell_settings);
+		}
+
 }
 
 
