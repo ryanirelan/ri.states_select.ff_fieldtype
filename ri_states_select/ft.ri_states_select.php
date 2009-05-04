@@ -33,7 +33,6 @@ class Ri_states_select extends Fieldframe_Fieldtype {
 		{
 		 	global $DSP;
 			$states = array(
-						'--'=>'--',
 						'AL'=>"Alabama",
 						'AK'=>"Alaska",
 						'AZ'=>"Arizona",
@@ -88,8 +87,9 @@ class Ri_states_select extends Fieldframe_Fieldtype {
 
 
 			$r = $DSP->input_select_header($field_name);
+			$r .= $DSP->input_select_option('', '--');
 			foreach ($states as $key => $value):
-				$r .= $DSP->input_select_option(($key == '--' ? '' : $key), $value, $field_data == $key);
+				$r .= $DSP->input_select_option($key, $value, $field_data == $key);
 			endforeach;
 			$r .= $DSP->input_select_footer();
 			return $r;
